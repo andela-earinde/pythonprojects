@@ -63,9 +63,11 @@ characters = { " " : [ " ",
 
 for row in range(7):
     for char in message:
-        printedMessage[row] += (str(characters[char][row]) + " ")
+        printedMessage[row] += (str(characters[char][row]) + " " * 5)
 
 offset = WIDTH
+
+print printedMessage
 
 while True:
     os.system("clear")
