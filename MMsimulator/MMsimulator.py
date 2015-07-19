@@ -60,3 +60,31 @@ def cycle():
     updatePanel("r%d" % r, reg[r])
     return 1
 
+def load_program(file):
+    global pReg, iReg, reg, mem
+    fil = open(file, 'r')
+    while 1:
+        lin = fil.readline()
+        if lin == "": break
+        if lin[0] < '0': continue
+        try:
+            flds = string.split(lin)
+            address = int(flds[0])
+            instruc = int(flds[1])
+            mem[address] = instruc
+        except: pass
+    file.close()
+
+def main():
+    global pReg, iReg, reg, mem
+    load_program(sys.argv[1])
+    print "\033[1;1H\033[0J%s" % panel
+    pReg = 100
+    updatePanel('pReg', pReg)
+    while 1 :
+        if not cycle() : break
+    print "\033[20;1H"  
+
+if __name__ == "__main__" : 
+    main()
+
